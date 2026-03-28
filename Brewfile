@@ -9,6 +9,7 @@ brew "nvm"
 brew "yarn"
 brew "neovim"
 brew "gh"
+brew "jq"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # Used by nvim ibhagwan/fzf-lua
