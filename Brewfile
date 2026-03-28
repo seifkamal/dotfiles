@@ -5,9 +5,14 @@ cask "font-jetbrains-mono-nerd-font"
 cask "claude-code"
 cask "codex"
 
+brew "nvm"
+brew "yarn"
 brew "neovim"
-brew "ripgrep"
-brew "fzf"
 brew "gh"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
+# Used by nvim ibhagwan/fzf-lua
+brew "ripgrep"
+brew "fzf"
+# Used by nvim-treesitter
+brew "tree-sitter-cli"
