@@ -1,5 +1,7 @@
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
 brew bundle
-source .git/install.sh
-ln -sv kitty ~/.config/kitty
-ln -sv nvim ~/.config/nvim
-ln -sv .zshrc ~/.zshrc
+ln -svn ${SCRIPT_DIR}/kitty ~/.config/kitty
+ln -svn ${SCRIPT_DIR}/nvim ~/.config/nvim
+ln -svn ${SCRIPT_DIR}/.zshrc ~/.zshrc
+source git/install.sh
