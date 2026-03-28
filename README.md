@@ -19,4 +19,4 @@ Local profiles can be created in the root directory (`~/*`) for the following:
 
 | Profile        | Supported Local Version |
 | -------------- | ----------------------- |
-| .bash\_profile | .bash\_profile.local    |
+| .zshrc         | .zshrc\_local           |

@@ -1,0 +1,5 @@
+require("my.theme")
+require("my.sets")
+require("my.remaps")
+require("my.plugin_manager")
+require("my.autocmds")
