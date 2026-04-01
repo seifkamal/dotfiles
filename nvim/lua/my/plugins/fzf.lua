@@ -16,7 +16,7 @@ return {
         cmd = 'rg --files --hidden --follow --glob "!.git/*"',
       },
       grep = {
-        cmd = 'rg --vimgrep',
+        cmd = 'rg --vimgrep --column --line-number',
         actions = {
           ["ctrl-g"]   = { actions.toggle_ignore },
         },
