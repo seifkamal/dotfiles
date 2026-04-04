@@ -21,11 +21,22 @@ RESET='\033[0m'
 GIT_BRANCH=$(git -C "$DIR" rev-parse --abbrev-ref HEAD 2>/dev/null)
 if [ -n "$GIT_BRANCH" ]; then
   STAGED=$(git -C "$DIR" diff --cached --numstat 2>/dev/null | wc -l | tr -d ' ')
-  UNSTAGED=$(git -C "$DIR" diff --numstat 2>/dev/null | wc -l | tr -d ' ')
+  UNSTAGED_MODIFIED=$(git -C "$DIR" diff --numstat 2>/dev/null | wc -l | tr -d ' ')
+  UNTRACKED=$(git -C "$DIR" ls-files --others --exclude-standard 2>/dev/null | wc -l | tr -d ' ')
+  UNSTAGED=$((UNSTAGED_MODIFIED + UNTRACKED))
   GIT_STR=" ${GREY}on${RESET} ${GIT_BRANCH} ${GREY}with${RESET} ${GREEN}+${STAGED}${RESET} ${RED}~${UNSTAGED}${RESET}"
 else
   GIT_STR=""
 fi
 
+# PR info
+PR_JSON=$(gh pr view --json number,url 2>/dev/null)
+PR_NUM=$(echo "$PR_JSON" | jq -r '.number // empty')
+PR_URL=$(echo "$PR_JSON" | jq -r '.url // empty')
+
 # Output the status line - ${DIR##*/} extracts just the folder name
-echo -e "${GREY}in${RESET} ${DIR##*/}${GIT_STR}\n${GREY}using${RESET} ${PCT}% ${GREY}of${RESET} ${MODEL} ${GREY}at${RESET} \$${COST_STR}"
+echo -e "${GREY}in${RESET} ${DIR##*/}${GIT_STR}"
+echo -e "${GREY}using${RESET} ${PCT}% ${GREY}of${RESET} ${MODEL} ${GREY}at${RESET} \$${COST_STR}"
+if [ -n "$PR_NUM" ]; then
+  echo -e "${GREY}pr${RESET} \033]8;;${PR_URL}\007#${PR_NUM}\033]8;;\007"
+fi
